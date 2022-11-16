@@ -1,0 +1,8 @@
+
+NOTE:
+
+fork from OpenZKP_u256, just for my-prj build happy.
+
+https://github.com/0xProject/OpenZKP
+
+

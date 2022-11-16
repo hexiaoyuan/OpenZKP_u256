@@ -1,0 +1,65 @@
+[package]
+name = "zkp-u256"
+version = "0.2.1"
+description = "Performant implementation of 256-bit unsigned integers"
+repository = "https://github.com/0xProject/starkcrypto/tree/master/algebra/u256"
+keywords = ["cryptography", "u256", "algebra", "no-std", "wasm"]
+categories = ["algorithms", "cryptography", "no-std", "wasm", "science"]
+authors = [
+    "Remco Bloemen <remco@0x.org>",
+    "Mason Liang <mason@0x.org>",
+    "Paul Vienhage <paul@0x.org>"]
+readme = "Readme.md"
+license = "Apache-2.0"
+edition = "2018"
+
+[dependencies]
+crunchy = { version = "0.2.2", default_features = false }
+hex = { version = "0.4.3", default_features = false }
+itertools = { version = "0.10.5", default_features = false }
+no-std-compat = { version = "0.4.1", features = [ "alloc" ] }
+num-traits = { version = "0.2.15", default_features = false }
+parity-scale-codec = { version = "3.2.1", default-features = false, optional = true }
+proptest = { version = "1.0.0", optional = true }
+proptest-derive = { version = "0.3.0", optional = true }
+rand = { version = "0.8.5", optional = true }
+serde = { version = "1.0", default_features = false, optional = true }
+
+[dev-dependencies]
+bincode = "1.2.1"
+criterion = "0.4.0"
+proptest = "1.0.0"
+proptest-derive = "0.3.0"
+serde_json = "1.0"
+zkp-macros-decl = { version = "0.2.0", path = "../../utils/macros-decl" }
+
+[[bench]]
+name = "benchmark"
+harness = false
+
+[features]
+default = [
+    "inline",
+    "rand",
+    "std",
+    "serde",
+]
+std = [
+    "crunchy/std",
+    "hex/std",
+    "itertools/use_std",
+    "no-std-compat/std",
+    "num-traits/std",
+    "parity-scale-codec/std",
+    "serde/std",
+]
+asm = []
+stable = []
+inline = []
+parity_codec = [
+    "parity-scale-codec/derive",
+]
+
+# Allow math in docs
+[package.metadata.docs.rs]
+rustdoc-args = ["--html-in-header", ".cargo/katex-header.html"]
