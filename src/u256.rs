@@ -19,7 +19,7 @@ use std::cmp::Ordering;
 // See http://extremelearning.com.au/unreasonable-effectiveness-of-quasirandom-sequences/
 #[cfg_attr(any(test, feature = "proptest"), derive(Arbitrary))]
 #[cfg_attr(any(test, feature = "proptest"), proptest(no_params))]
-pub struct U256([u64; 4]);
+pub struct U256(pub [u64; 4]);
 
 // TODO: impl core::iter::Step so we have ranges
 
@@ -27,15 +27,6 @@ impl U256 {
     pub const MAX: Self = Self::from_limbs([u64::MAX, u64::MAX, u64::MAX, u64::MAX]);
     pub const ZERO: Self = Self::from_limbs([0, 0, 0, 0]);
     pub const ONE: Self = Self::from_limbs([1, 0, 0, 0]);
-    pub const TWO: Self = Self::from_limbs([2, 0, 0, 0]);
-    pub const THREE: Self = Self::from_limbs([3, 0, 0, 0]);
-    pub const FOUR: Self = Self::from_limbs([4, 0, 0, 0]);
-    pub const FIVE: Self = Self::from_limbs([5, 0, 0, 0]);
-    pub const SIX: Self = Self::from_limbs([6, 0, 0, 0]);
-    pub const SEVEN: Self = Self::from_limbs([7, 0, 0, 0]);
-    pub const EIGHT: Self = Self::from_limbs([8, 0, 0, 0]);
-    pub const NINE: Self = Self::from_limbs([9, 0, 0, 0]);
-    pub const TEN: Self = Self::from_limbs([10, 0, 0, 0]);
 
     // Force inlined because it is a trivial conversion which appears in many hot
     // paths
